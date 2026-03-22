@@ -1,7 +1,9 @@
 import pandas as pd
+import os
 
-DATA_PATH = "data/processed/online_retail_cleaned.csv"
-OUT_PATH = "data/processed/top_products.csv"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(BASE_DIR, "../data/processed/online_retail_cleaned.csv")
+OUT_PATH = os.path.join(BASE_DIR, "../data/processed/top_products.csv")
 
 df = pd.read_csv(DATA_PATH, low_memory=False)
 df["Invoice"] = df["Invoice"].astype(str).str.strip()

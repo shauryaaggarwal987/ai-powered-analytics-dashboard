@@ -1,0 +1,62 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1550,
+  "model": {
+    "culture": "en-US",
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "monthly_revenue",
+        "columns": [
+          {
+            "name": "YearMonth",
+            "dataType": "string",
+            "sourceColumn": "YearMonth"
+          }
+        ],
+        "lineageTag": "monthly_revenue_tag",
+        "partitions": [
+          {
+            "name": "monthly_revenue",
+            "mode": "import",
+            "source": {
+              "expression": "let\n    Source = #table(type table [YearMonth = text], {{\"2010-02\"}})\nin\n    Source",
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "month_country_revenue",
+        "columns": [
+          {
+            "name": "Country",
+            "dataType": "string",
+            "sourceColumn": "Country"
+          },
+          {
+            "name": "YearMonth",
+            "dataType": "string",
+            "sourceColumn": "YearMonth"
+          }
+        ],
+        "lineageTag": "month_country_revenue_tag",
+        "partitions": [
+          {
+            "name": "month_country_revenue",
+            "mode": "import",
+            "source": {
+              "expression": "let\n    Source = #table(type table [Country = text, YearMonth = text], {{\"Germany\", \"2010-02\"}})\nin\n    Source",
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,57 +1,36 @@
 {
-    "name": "RetailAnalysis",
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/1.0.0/schema.json",
+    "config": "{\"version\":\"5.0\"}",
+    "reportId": "retail-analysis-report-001",
     "sections": [
         {
             "name": "ReportSection1",
-            "displayName": "Executive Overview",
+            "displayName": "Dashboard",
             "filters": [
                 {
                     "name": "Filter_YearMonth",
+                    "type": "Basic",
                     "expression": {
                         "Column": {
                             "Expression": {
-                                "SourceRef": {
-                                    "Entity": "monthly_revenue"
-                                }
+                                "SourceRef": { "Entity": "monthly_revenue" }
                             },
                             "Property": "YearMonth"
                         }
                     },
-                    "type": "Categorical",
                     "filter": {
                         "Version": 2,
                         "From": [
-                            {
-                                "Name": "m",
-                                "Entity": "monthly_revenue",
-                                "Type": 0
-                            }
+                            { "Name": "m", "Entity": "monthly_revenue", "Type": 0 }
                         ],
                         "Where": [
                             {
                                 "Condition": {
                                     "In": {
                                         "Expressions": [
-                                            {
-                                                "Column": {
-                                                    "Expression": {
-                                                        "SourceRef": {
-                                                            "Source": "m"
-                                                        }
-                                                    },
-                                                    "Property": "YearMonth"
-                                                }
-                                            }
+                                            { "Column": { "Expression": { "SourceRef": { "Source": "m" } }, "Property": "YearMonth" } }
                                         ],
-                                        "Values": [
-                                            [
-                                                {
-                                                    "Literal": {
-                                                        "Value": "'2011-01'"
-                                                    }
-                                                }
-                                            ]
-                                        ]
+                                        "Values": "__FILTER_YEARMONTH_VALUES__"
                                     }
                                 }
                             }
@@ -60,36 +39,61 @@
                 },
                 {
                     "name": "Filter_Country",
+                    "type": "Basic",
                     "expression": {
                         "Column": {
                             "Expression": {
-                                "SourceRef": {
-                                    "Entity": "month_country_revenue"
-                                }
+                                "SourceRef": { "Entity": "month_country_revenue" }
                             },
                             "Property": "Country"
                         }
+                    },
+                    "filter": {
+                        "Version": 2,
+                        "From": [
+                            { "Name": "c", "Entity": "month_country_revenue", "Type": 0 }
+                        ],
+                        "Where": [
+                            {
+                                "Condition": {
+                                    "In": {
+                                        "Expressions": [
+                                            { "Column": { "Expression": { "SourceRef": { "Source": "c" } }, "Property": "Country" } }
+                                        ],
+                                        "Values": "__FILTER_COUNTRY_VALUES__"
+                                    }
+                                }
+                            }
+                        ]
                     }
                 }
             ],
             "visualContainers": [
                 {
                     "name": "VisualContainer_Title",
+                    "type": "textbox",
+                    "x": 0, "y": 0, "width": 1280, "height": 60,
                     "config": {
-                        "name": "VisualContainer_Title",
                         "singleVisual": {
                             "visualType": "textbox",
                             "objects": {
                                 "general": [
                                     {
                                         "properties": {
-                                            "text": {
-                                                "expr": {
-                                                    "Literal": {
-                                                        "Value": "'__DASHBOARD_TITLE__'"
-                                                    }
+                                            "paragraphs": [
+                                                {
+                                                    "textRuns": [
+                                                        {
+                                                            "value": "__DASHBOARD_TITLE__",
+                                                            "textStyle": {
+                                                                "fontFamily": "Segoe UI",
+                                                                "fontSize": "24px",
+                                                                "fontWeight": "bold"
+                                                            }
+                                                        }
+                                                    ]
                                                 }
-                                            }
+                                            ]
                                         }
                                     }
                                 ]
@@ -99,19 +103,57 @@
                 },
                 {
                     "name": "VisualContainer_Trend",
+                    "type": "lineChart",
+                    "x": 0, "y": 80, "width": 640, "height": 400,
                     "config": {
-                        "name": "VisualContainer_Trend",
                         "singleVisual": {
-                            "visualType": "lineChart"
+                            "visualType": "lineChart",
+                            "projections": {
+                                "Category": [
+                                    { "queryRef": "monthly_revenue.YearMonth" }
+                                ],
+                                "Y": [
+                                    { "queryRef": "monthly_revenue.Revenue" }
+                                ]
+                            },
+                            "prototypeQuery": {
+                                "Version": 2,
+                                "From": [
+                                    { "Name": "m", "Entity": "monthly_revenue", "Type": 0 }
+                                ],
+                                "Select": [
+                                    { "Column": { "Expression": { "SourceRef": { "Source": "m" } }, "Property": "YearMonth" }, "Name": "monthly_revenue.YearMonth" },
+                                    { "Aggregation": { "Expression": { "Column": { "Expression": { "SourceRef": { "Source": "m" } }, "Property": "Revenue" } }, "Function": 0 }, "Name": "monthly_revenue.Revenue" }
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "VisualContainer_TopCountries",
+                    "type": "columnChart",
+                    "x": 640, "y": 80, "width": 640, "height": 400,
                     "config": {
-                        "name": "VisualContainer_TopCountries",
                         "singleVisual": {
-                            "visualType": "columnChart"
+                            "visualType": "columnChart",
+                            "projections": {
+                                "Category": [
+                                    { "queryRef": "month_country_revenue.Country" }
+                                ],
+                                "Y": [
+                                    { "queryRef": "month_country_revenue.Revenue" }
+                                ]
+                            },
+                            "prototypeQuery": {
+                                "Version": 2,
+                                "From": [
+                                    { "Name": "c", "Entity": "month_country_revenue", "Type": 0 }
+                                ],
+                                "Select": [
+                                    { "Column": { "Expression": { "SourceRef": { "Source": "c" } }, "Property": "Country" }, "Name": "month_country_revenue.Country" },
+                                    { "Aggregation": { "Expression": { "Column": { "Expression": { "SourceRef": { "Source": "c" } }, "Property": "Revenue" } }, "Function": 0 }, "Name": "month_country_revenue.Revenue" }
+                                ]
+                            }
                         }
                     }
                 }
