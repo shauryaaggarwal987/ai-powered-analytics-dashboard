@@ -1,0 +1,36 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1550,
+  "model": {
+    "culture": "en-US",
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "DummyTable",
+        "columns": [
+          {
+            "name": "DummyColumn",
+            "dataType": "string",
+            "sourceColumn": "DummyColumn"
+          }
+        ],
+        "lineageTag": "dummy-lineage-tag",
+        "partitions": [
+          {
+            "name": "DummyTable",
+            "mode": "import",
+            "source": {
+              "expression": "let\n    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i44FAA==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [DummyColumn = _t])\nin\n    Source",
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

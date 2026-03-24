@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='utf-8'?>
+<workbook xmlns:user="http://www.tableausoftware.com/xml/user" original-version="18.1" source-build="2023.3.0 (20233.23.1017.0948)" source-platform="win" version="18.1">
+  <document-format-change-manifest>
+    <_.fcp.AnimationOnByDefault.true...AnimationOnByDefault />
+    <_.fcp.MarkAnimation.true...MarkAnimation />
+    <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
+    <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <repository-location id="RetailAnalysis" path="/workbooks" revision="1.0" />
+  <preferences>
+    <preference name="ui.encoding.shelf.height" value="24" />
+    <preference name="ui.shelf.height" value="26" />
+  </preferences>
+  <datasources>
+    
+    <datasource hasconnection="false" inline="true" name="Parameters" version="18.1">
+      <aliases enabled="yes" />
+      <column caption="Country Parameter" datatype="string" name="[Country Parameter]" param-domain-type="any" role="measure" type="nominal" value="France">
+        <calculation class="tableau" formula="&quot;France&quot;" />
+      </column>
+      <column caption="Month Parameter" datatype="string" name="[Month Parameter]" param-domain-type="any" role="measure" type="nominal" value="2011-03">
+        <calculation class="tableau" formula="&quot;2011-03&quot;" />
+      </column>
+    </datasource>
+    <datasource inline="true" name="MockData" version="18.1">
+      <connection class="federated">
+        <named-connections>
+          <named-connection caption="mockdata" name="mockdata">
+            <connection class="textscan" directory="." filename="mock.csv" password="" server="" />
+          </named-connection>
+        </named-connections>
+      </connection>
+      <column datatype="string" name="[Country]" role="dimension" type="nominal" />
+      <column datatype="string" name="[YearMonth]" role="dimension" type="nominal" />
+      <column datatype="real" name="[Revenue]" role="measure" type="quantitative" />
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name="Sales Overview">
+      <table />
+    </worksheet>
+  </worksheets>
+  <windows saved-dpi-scale-factor="1.25" source-height="37">
+    <window class="worksheet" name="Sales Overview">
+      <cards>
+        <edge name="left">
+          <strip size="160">
+            <card type="pages" />
+            <card type="filters" />
+            <card type="marks" />
+          </strip>
+        </edge>
+        <edge name="top">
+          <strip size="2147483647">
+            <card type="columns" />
+          </strip>
+          <strip size="2147483647">
+            <card type="rows" />
+          </strip>
+          <strip size="2147483647">
+            
+            <card type="title" text="Filtered Sales Overview" />
+          </strip>
+        </edge>
+      </cards>
+      
+      <viewpoint>
+        <filter class="categorical" column="[MockData].[Country]">
+          <groupfilter function="member" level="[Country]" member="&quot;__DUMMY_COUNTRY__&quot;" user:ui-domain="database" user:ui-enumeration="inclusive" user:ui-marker="enumerate" />
+        </filter>
+        <filter class="categorical" column="[MockData].[YearMonth]">
+          <groupfilter function="member" level="[YearMonth]" member="&quot;__DUMMY_MONTH__&quot;" user:ui-domain="database" user:ui-enumeration="inclusive" user:ui-marker="enumerate" />
+        </filter>
+      </viewpoint>
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height="192" name="Sales Overview" width="192">
+    </thumbnail>
+  </thumbnails>
+</workbook>
