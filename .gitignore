@@ -1,2 +1,23 @@
 # Ignore secret environment variables
 .env
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Build
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large files (optional)
+*.csv
+*.pbix
