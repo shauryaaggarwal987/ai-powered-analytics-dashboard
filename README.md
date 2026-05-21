@@ -1,5 +1,14 @@
 # AI-Powered Analytics Dashboard
 
+> **Note:** This is a fork of the original collaborative project for portfolio purposes.  
+> **Original development:** Jan–May 2026  
+> **Original repository:** https://github.com/dosasha/ai-powered-analytics-dashboard  
+> **My contributions** are visible in the commit history.
+
+---
+
+# AI-Powered Analytics Dashboard
+
 An intelligent system that programmatically generates tailored Power BI dashboards (PBIP format) based on natural language requests using the Google Gemini API.
 
 ## ✨ Features
